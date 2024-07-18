@@ -15,6 +15,21 @@ import WorkingHours from "@/components/ManagerFAQs/workingHours";
 import MultipleServices from "@/components/CalendarFAQs/multipleServicesNotes";
 import ViewSingleStaff from "@/components/CalendarFAQs/viewSingleStaff";
 import CalendarView from "@/components/CalendarFAQs/calendarView";
+import ManuallyAdd from "@/components/ClientFAQs/manuallyAdd";
+import EditClient from "@/components/ClientFAQs/editClient";
+import AppHistory from "@/components/ClientFAQs/appointmentHistory";
+import RebookHistory from "@/components/ClientFAQs/rebookHistory";
+import CompanyInfo from "@/components/ManagerFAQs/companyInfo";
+import EmailSetting from "@/components/ManagerFAQs/emailSetting";
+import AddSerivce from "@/components/ManagerFAQs/addService";
+import AddCat from "@/components/ManagerFAQs/addCat";
+import EditSerivce from "@/components/ManagerFAQs/EditService";
+import EditCat from "@/components/ManagerFAQs/editCat";
+import EditStatus from "@/components/ManagerFAQs/editStatus";
+import EditStaff from "@/components/ManagerFAQs/editStaff";
+import EditSchedule from "@/components/ManagerFAQs/editSchedule";
+import AddStaff from "@/components/ManagerFAQs/addStaff";
+import StaffServices from "@/components/ManagerFAQs/staffService";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,30 +60,30 @@ export default function Home() {
   const clientFaqs = [
     {
       question: "How to manually add a new client?",
-      answer: <WorkingHours />,
+      answer: <ManuallyAdd />,
     },
     {
       question: "How to edit client details?",
-      answer: <WorkingHours />,
+      answer: <EditClient />,
     },
     {
       question: "How to view client's appointment history?",
-      answer: <WorkingHours />,
+      answer: <AppHistory />,
     },
     {
       question: "How to rebook an appointment client's appointment history?",
-      answer: <WorkingHours />,
+      answer: <RebookHistory />,
     },
-  ]
+  ];
 
   const managerFaqs = [
     {
       question: "How to change business information?",
-      answer: <WorkingHours />,
+      answer: <CompanyInfo />,
     },
     {
       question: "How to change business email setting?",
-      answer: <WorkingHours />,
+      answer: <EmailSetting />,
     },
     {
       question: "How to change business working hours?",
@@ -76,43 +91,47 @@ export default function Home() {
     },
     {
       question: "How to add new service category?",
-      answer: <WorkingHours />,
+      answer: <AddCat />,
     },
     {
       question: "How to add new service?",
-      answer: <WorkingHours />,
+      answer: <AddSerivce />,
     },
     {
       question: "How to edit service category?",
-      answer: <WorkingHours />,
+      answer: <EditCat />,
     },
     {
       question: "How to edit service details?",
-      answer: <WorkingHours />,
+      answer: <EditSerivce />,
     },
     {
       question: "How to add a new staff?",
-      answer: <WorkingHours />,
+      answer: <AddStaff />,
     },
     {
       question: "How to assign service to staff?",
-      answer: <WorkingHours />,
+      answer: <StaffServices />,
     },
     {
       question: "How to edit staff details?",
-      answer: <WorkingHours />,
+      answer: <EditStaff />,
     },
     {
       question: "How to edit schedules?",
-      answer: <WorkingHours />,
+      answer: <EditSchedule />,
     },
     {
-      question: "How to change status?",
-      answer: <WorkingHours />,
+      question: "How to change status colour?",
+      answer: <EditStatus />,
     },
   ];
 
   const filteredCalendarFaqs = calendarFaqs.filter((faq) =>
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredClientFaqs = clientFaqs.filter((faq) =>
     faq.question.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -191,7 +210,7 @@ export default function Home() {
             Clients
           </h3>
           <Accordion type="single" collapsible className="w-full mb-8">
-            {clientFaqs.map((faq, index) => (
+            {filteredClientFaqs.map((faq, index) => (
               <AccordionItem key={index} value={`calendar-item-${index}`}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent>{faq.answer}</AccordionContent>
